@@ -33,21 +33,21 @@ You need to upload an Excel format input data with column names matching the pro
 | 10000.00  | 0.50| 1.20| 0.38  | 3.79  |
 
 ## Terminology
-TP: Total population 
-Pe: prevalence of the risk factor in the populaiton 
-RR: relative risk 
-CIR: ratio of upper-to-lower 95% confidnce inverfal of relative risk 
+TP: Total population  
+Pe: prevalence of the risk factor in the populaiton  
+RR: relative risk  
+CIR: ratio of upper-to-lower 95% confidnce inverfal of relative risk  
      (e.g. if RR (95% CI) = 10.0 (2.43-41.22), then CIR = 41.20/2.43=17)   
-Var.Pe: variance of Pe 
-O: Odds of Pe 
-logse: the standard error of log(RR) 
-Z: Absolute value of beta divided by logse Pval: P-value 
-Var.beta: square of logse 
-AF: Attributable fraction 
-Delta.Var.AF, Delta.low, Delta.up: Variance, lower and upper 95% CI of AF using Delta method 
-Green.Var.AF, Green.low, Green.up: Variance, lower and upper 95% CI of AF using Greenland method 
-Monte.RR, Monte.Pe, Monte.AF, Monte.low, Monte.up: Median and 95% CI for the RR, Pe, and AF from the Monte Carlo method 
-Sensitivity results: Derivatives of AF, Delta.Var.AF, and Green.Var.AF with respect to each of the inputs (beta, Var.beta, Tp, Pe) are calculated. 
+Var.Pe: variance of Pe  
+O: Odds of Pe  
+logse: the standard error of log(RR)  
+Z: Absolute value of beta divided by logse Pval: P-value  
+Var.beta: square of logse  
+AF: Attributable fraction  
+Delta.Var.AF, Delta.low, Delta.up: Variance, lower and upper 95% CI of AF using Delta method  
+Green.Var.AF, Green.low, Green.up: Variance, lower and upper 95% CI of AF using Greenland method  
+Monte.RR, Monte.Pe, Monte.AF, Monte.low, Monte.up: Median and 95% CI for the RR, Pe, and AF from the Monte Carlo method  
+Sensitivity results: Derivatives of AF, Delta.Var.AF, and Green.Var.AF with respect to each of the inputs (beta, Var.beta, Tp, Pe) are calculated.  
 
 ## Citation
 Please cite as:
