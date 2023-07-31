@@ -9,7 +9,8 @@ https://sjunlee.shinyapps.io/GDMPAFCIExplorer/
 1. Enter your information in the "Name", "Affiliation", "Email" fields and click the "Confirm" button.
 
 2. Provide your "Tp", "RR", "CIR", "Pe" values in the "Please enter your inputs:" section, or
-- "CIR" is defined as the ratio of upper-to-lower 95% confidnce inverfal of ralative risk (e.g. if RR (95% CI) = 10.0 (2.43-41.22), then CIR = 41.20/2.43=17)  
+- "CIR" is defined as the ratio of upper-to-lower 95% confidnce inverfal of ralative risk
+- (e.g. if RR (95% CI) = 10.0 (2.43-41.22), then CIR = 41.20/2.43=17)  
 
 3. Upload your Excel file with the data in the "Or upload an Excel file with your inputs:" section.
 
