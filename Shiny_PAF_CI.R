@@ -54,7 +54,7 @@ server <- function(input, output, session) {
   reactiveData <- reactive({
     req(input$inputName, input$inputAffiliation, input$inputEmail)
     
-    # Check if user has uploaded a file
+
     if (!is.null(input$inputFile)) {
       
       data <- read.xlsx(input$inputFile$datapath)
@@ -82,12 +82,12 @@ server <- function(input, output, session) {
                     Var.beta = (logse)^2,                
                     AF = (((Pe*(RR-1))/(Pe*(RR-1)+1))),
                     
-                    ##Delta method##
+                    ##Delta method
                     Delta.Var.AF = (((RR-1)^2)*Var.Pe + ((Pe*RR)^2)*Var.beta)/((1+Pe*(RR-1))^4),
                     Delta.low = AF-(qnorm(1-0.025))*sqrt(Delta.Var.AF),
                     Delta.up = AF+(qnorm(1-0.025))*sqrt(Delta.Var.AF),
                     
-                    ##Greenland method##
+                    ##Greenland method
                     Green.Var.AF =((O/Tp)*((RR-1)^2 + Var.beta*RR^2) + Var.beta*O^2*RR^2 )*(1-AF)^2/(1+O)^2,
                     Green.low = (1-(1-(AF))*exp((qnorm(1-0.025))*sqrt(Green.Var.AF))),
                     Green.up = (1-(1-(AF))*exp(-(qnorm(1-0.025))*sqrt(Green.Var.AF))))
