@@ -1,4 +1,4 @@
-## GDM-PAF CI Explorer
+## GDM-PAF CI Explorer (PAF 95% CI Explorer: Greenland, Delta, Monte Carlo Edition)
 The GDM-PAF CI Explorer is a Shiny web application for exploring the confidence intervals of GDM-PAF. This app allows users to either provide their inputs directly or upload an Excel file to see the analysis results. 
 
 ## How to run
