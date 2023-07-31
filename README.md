@@ -9,8 +9,6 @@ https://sjunlee.shinyapps.io/GDMPAFCIExplorer/
 1. Enter your information in the "Name", "Affiliation", "Email" fields and click the "Confirm" button.
 
 2. Provide your "Tp", "RR", "CIR", "Pe" values in the "Please enter your inputs:" section, or
-- "CIR" is defined as the ratio of upper-to-lower 95% confidnce inverfal of ralative risk
-- (e.g. if RR (95% CI) = 10.0 (2.43-41.22), then CIR = 41.20/2.43=17)  
 
 3. Upload your Excel file with the data in the "Or upload an Excel file with your inputs:" section.
 
@@ -33,6 +31,23 @@ You need to upload an Excel format input data with column names matching the pro
 | 100000.00 | 0.10| 1.20| 0.69  | 2.08  |
 | 10000.00  | 0.01| 5.00| 2.89  | 8.66  |
 | 10000.00  | 0.50| 1.20| 0.38  | 3.79  |
+
+## Terminology
+TP: Total population 
+Pe: prevalence of the risk factor in the populaiton 
+RR: relative risk 
+CIR: ratio of upper-to-lower 95% confidnce inverfal of relative risk 
+     (e.g. if RR (95% CI) = 10.0 (2.43-41.22), then CIR = 41.20/2.43=17)   
+Var.Pe: variance of Pe 
+O: Odds of Pe 
+logse: the standard error of log(RR) 
+Z: Absolute value of beta divided by logse Pval: P-value 
+Var.beta: square of logse 
+AF: Attributable fraction 
+Delta.Var.AF, Delta.low, Delta.up: Variance, lower and upper 95% CI of AF using Delta method 
+Green.Var.AF, Green.low, Green.up: Variance, lower and upper 95% CI of AF using Greenland method 
+Monte.RR, Monte.Pe, Monte.AF, Monte.low, Monte.up: Median and 95% CI for the RR, Pe, and AF from the Monte Carlo method 
+Sensitivity results: Derivatives of AF, Delta.Var.AF, and Green.Var.AF with respect to each of the inputs (beta, Var.beta, Tp, Pe) are calculated. 
 
 ## Citation
 Please cite as:
