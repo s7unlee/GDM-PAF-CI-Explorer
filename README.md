@@ -16,6 +16,8 @@ https://sjunlee.shinyapps.io/GDMPAFCIExplorer/
 4. Click the "Download Data" button to download the results of the analysis.
 
 ## Excel File format
+You need to upload an Excel format input data with column names matching the provided table, taking into account case sensitivity.
+
 | Tp        | Pe  | RR  | Lower | Upper |
 | --------- | --- | --- | ----- | ----- |
 | 1000.00   | 0.01| 1.20| 1.05  | 1.37  |
