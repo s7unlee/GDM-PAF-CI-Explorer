@@ -224,8 +224,8 @@ server <- function(input, output, session) {
   output$variableDescription <- renderText({
     paste(" TP: Total population", "\n",
           "Pe: prevalence of the risk factor in the populaiton", "\n",
-          "RR: ralative risk", "\n",
-          "CIR: ratio of upper-to-lower 95% confidnce inverfal of ralative risk", "\n",
+          "RR: relative risk", "\n",
+          "CIR: ratio of upper-to-lower 95% confidnce inverfal of relative risk", "\n",
           "     (e.g. if RR (95% CI) = 10.0 (2.43-41.22), then CIR = 41.20/2.43=17)  ", "\n",
           "Var.Pe: variance of Pe", "\n",
           "O: Odds of Pe", "\n",
