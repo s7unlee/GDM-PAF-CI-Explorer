@@ -32,7 +32,7 @@ You need to upload an Excel format input data with column names matching the pro
 | 10000.00  | 0.01| 5.00| 2.89  | 8.66  |
 | 10000.00  | 0.50| 1.20| 0.38  | 3.79  |
 
-## Output Format
+## Output format
 | **Term** | Description |
 | --- | --- |
 | **TP** | Total population |
