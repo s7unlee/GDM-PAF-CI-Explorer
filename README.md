@@ -32,22 +32,32 @@ You need to upload an Excel format input data with column names matching the pro
 | 10000.00  | 0.01| 5.00| 2.89  | 8.66  |
 | 10000.00  | 0.50| 1.20| 0.38  | 3.79  |
 
-## Terminology
-**TP**: Total population  
-**Pe**: prevalence of the risk factor in the populaiton  
-**RR**: relative risk  
-**CIR**: ratio of upper-to-lower 95% confidnce inverfal of relative risk  
-     (e.g. if RR (95% CI) = 10.0 (2.43-41.22), then CIR = 41.20/2.43=17)   
-**Var.Pe**: variance of Pe  
-**O**: Odds of Pe  
-**logse**: the standard error of log(RR)  
-**Z**: Absolute value of beta divided by logse Pval: P-value  
-**Var.beta**: square of logse  
-**AF**: Attributable fraction  
-**Delta.Var.AF, Delta.low, Delta.up**: Variance, lower and upper 95% CI of AF using Delta method  
-**Green.Var.AF, Green.low, Green.up**: Variance, lower and upper 95% CI of AF using Greenland method  
-**Monte.RR, Monte.Pe, Monte.AF, Monte.low, Monte.up**: Median and 95% CI for the RR, Pe, and AF from the Monte Carlo method  
-**Sensitivity results**: Derivatives of AF, Delta.Var.AF, and Green.Var.AF with respect to each of the inputs (beta, Var.beta, Tp, Pe) are calculated.  
+## Output Format
+| **Term** | Description |
+| --- | --- |
+| **TP** | Total population |
+| **Pe** | Prevalence of the risk factor in the population |
+| **RR** | Relative risk |
+| **CIR** | Ratio of upper-to-lower 95% confidence interval of relative risk |
+| **Var.Pe** | Variance of Pe |
+| **O** | Odds of Pe |
+| **logse** | The standard error of log(RR) |
+| **Z** | Absolute value of beta divided by logse |
+| **Pval** | P-value |
+| **Var.beta** | Square of logse |
+| **AF** | Attributable fraction |
+| **Delta.Var.AF** | Variance of AF using Delta method |
+| **Delta.low** | Lower 95% CI of AF using Delta method |
+| **Delta.up** | Upper 95% CI of AF using Delta method |
+| **Green.Var.AF** | Variance of AF using Greenland method |
+| **Green.low** | Lower 95% CI of AF using Greenland method |
+| **Green.up** | Upper 95% CI of AF using Greenland method |
+| **Monte.RR** | Median and 95% CI for the RR from the Monte Carlo method |
+| **Monte.Pe** | Median and 95% CI for the Pe from the Monte Carlo method |
+| **Monte.AF** | Median and 95% CI for the AF from the Monte Carlo method |
+| **Monte.low** | Lower 95% CI from the Monte Carlo method |
+| **Monte.up** | Upper 95% CI from the Monte Carlo method |
+| **Sensitivity results** | Derivatives of AF, Delta.Var.AF, and Green.Var.AF with respect to each of the inputs (beta, Var.beta, TP, Pe) are calculated |
 
 ## Citation
 Please cite as:
