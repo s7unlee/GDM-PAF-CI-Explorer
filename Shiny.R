@@ -54,7 +54,7 @@ server <- function(input, output, session) {
   reactiveData <- reactive({
     req(input$inputName, input$inputAffiliation, input$inputEmail)
     
-
+    
     if (!is.null(input$inputFile)) {
       
       data <- read.xlsx(input$inputFile$datapath)
@@ -70,7 +70,7 @@ server <- function(input, output, session) {
       colnames(data) <- c("Tp", "Pe", "RR", "CIR")
     }
     
-   
+    
     data1 <- dplyr::rename(data, Tp =Tp, Pe = Pe, RR = RR, CIR = CIR )%>%
       dplyr::mutate(beta = log(RR) , 
                     Var.Pe = (Pe*(1-Pe))/Tp, 
@@ -131,7 +131,8 @@ server <- function(input, output, session) {
     
     
     data2 <- cbind(data1, monte.results)
-
+    
+    delta <- 0.01
     
     compute_delta_var_AF <- function(Tp, Pe, RR, Var_beta) {
       Var.Pe = (Pe*(1-Pe))/Tp
@@ -142,32 +143,7 @@ server <- function(input, output, session) {
       O = Pe/(1-Pe)
       ((O/Tp)*((RR-1)^2 + Var_beta*RR^2) + Var_beta*O^2*RR^2 )*(1-AF)^2/(1+O)^2
     }
-    
-    
-    
-    delta <- 0.01
-    
-    compute_MonteAF <- function(MonteRR, MontePe) {
-      MonteAF <- (MontePe*(MonteRR-1.0)) / (1.0 + MontePe*(MonteRR - 1.0))
-      return(MonteAF)
-    }
-    
-    compute_MonteAF_perturb <- function(MonteRR, MontePe, perturb_value) {
-      MonteAF <- (MontePe * (MonteRR * perturb_value - 1.0)) / (1.0 + MontePe * (MonteRR * perturb_value - 1.0))
-      return(MonteAF)
-    }
-    
-    
-    data2$MonteAF <- compute_MonteAF(data2$Monte.RR, data2$Monte.Pe)
-    
-    for (var in c("beta", "Var.beta", "Tp", "Pe")) {
-      data2[[paste0("MonteAF_", var)]] <- compute_MonteAF_perturb(data2$Monte.RR, data2$Monte.Pe, data2[[var]] * delta)
-    }
-    
-    for (var in c("beta", "Var.beta", "Tp", "Pe")) {
-      data2[[paste0("Monte.Sen.", var)]] <- (data2[[paste0("MonteAF_", var)]] - data2$MonteAF) / (data2[[var]] * delta)
-    }
-    
+
     
     data3 <- data2 %>%
       mutate(
