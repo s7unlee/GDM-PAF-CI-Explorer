@@ -1,4 +1,4 @@
-# GDM-PAF CI Explorer (PAF 95% CI Explorer: Greenland, Delta, Monte Carlo Edition)
+# GDM-PAF CI Explorer (PAF 95% CI Explorer: Greenland, Delta, Monte Carlo methods)
 
 The **GDM-PAF CI Explorer** is a Shiny web application for exploring the confidence intervals of Population Attributable Fraction (PAF). This app supports two key functionalities:
 1. Calculating PAF and its 95% confidence intervals using Greenland, Delta, and Monte Carlo methods.
