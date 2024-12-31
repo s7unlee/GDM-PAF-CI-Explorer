@@ -6,70 +6,86 @@ library(openxlsx)
 
 ui <- fluidPage(
   shinyjs::useShinyjs(),
-  titlePanel("GDM-PAF CI Explorer"),
-  
-  sidebarLayout(
-    sidebarPanel(
-      div(id="infoInputs",
-          
-          helpText("Please enter your name, affiliation, and email for the analysis to proceed. Your information will not be stored."),
-          
-          textInput("inputName", "Name"),
-          textInput("inputAffiliation", "Affiliation"),
-          textInput("inputEmail", "Email"),
-          actionButton("confirmInfo", "Confirm")
-      ),
-      
-      tags$br(), tags$br(),
-      
-      tags$p("Please enter your inputs:"),
-      numericInput("inputTp", "Tp (e.g. 10000)", value = 1, min = 0),
-      numericInput("inputRR", "RR (e.g. 1.7)", value = 1, min = 0),
-      numericInput("inputCIR", "CIR (e.g. 13)", value = 1, min = 0),
-      numericInput("inputPe", "Pe (e.g. 0.24)", value = 1, min = 0, max = 1),
-      
-      tags$br(), tags$br(), 
-      
-      tags$p("Or upload an Excel file with your inputs:"),
-      fileInput("inputFile", "Upload Excel File"),
-      
-      downloadButton("downloadData", "Download Data")
+  navbarPage(
+    "GDM-PAF CI Explorer",
+    
+    # Tab 1: Single Input Calculator
+    tabPanel("Single Input Calculator",
+             sidebarLayout(
+               sidebarPanel(
+                 div(id = "infoInputs",
+                     helpText("Please enter your name, affiliation, and email for the analysis to proceed. Your information will not be stored."),
+                     textInput("inputName", "Name"),
+                     textInput("inputAffiliation", "Affiliation"),
+                     textInput("inputEmail", "Email"),
+                     actionButton("confirmInfo", "Confirm")
+                 ),
+                 tags$br(), tags$br(),
+                 tags$p("Please enter your inputs:"),
+                 numericInput("inputTp", "Tp (e.g. 10000)", value = 1, min = 0),
+                 numericInput("inputRR", "RR (e.g. 1.7)", value = 1, min = 0),
+                 numericInput("inputCIR", "CIR (e.g. 13)", value = 1, min = 0),
+                 numericInput("inputPe", "Pe (e.g. 0.24)", value = 1, min = 0, max = 1),
+                 tags$br(), tags$br(),
+                 tags$p("Or upload an Excel file with your inputs:"),
+                 fileInput("inputFile", "Upload Excel File"),
+                 downloadButton("downloadData", "Download Results")
+               ),
+               mainPanel(
+                 tableOutput("outputTable"),
+                 verbatimTextOutput("variableDescription"),
+                 tags$div(
+                   style = "display: inline;",
+                   tags$p("The format of the excel file should be as follows:", style = "display: inline;"),
+                   tags$a(href = "https://doi.org/10.3961/jpmph.24.272", "doi.org/10.3961/jpmph.24.272", style = "display: inline;"),
+                   
+                   tags$br(), tags$br(),
+                   tags$p("Github:", style = "display: inline;"),
+                   tags$a(href = "https://github.com/s7unlee/GDM-PAF-CI-Explorer", "https://github.com/s7unlee/GDM-PAF-CI-Explorer", style = "display: inline;"),
+                   tags$br(), tags$br()
+                   
+                 ),
+                 tableOutput("excelFormat")
+               )
+               
+             )
     ),
     
-    mainPanel(
-      tableOutput("outputTable"),
-      verbatimTextOutput("variableDescription"),
-      tags$p("Please cite as: "),
-      #tags$a(href="https://www.naver.com", "Link to the related paper"),
-      
-      tags$p("The format of the excel file should be as follows:"),
-      tableOutput("excelFormat")
-      
+    # Tab 2: Polytomous Exposure Calculator
+    tabPanel("Polytomous Exposure Calculator",
+             sidebarLayout(
+               sidebarPanel(
+                 tags$p("Please upload an Excel file containing the input data."),
+                 fileInput("polyFile", "Upload Excel File", accept = c(".xlsx")),
+                 downloadButton("downloadPolyResults", "Download Results")
+               ),
+               mainPanel(
+                 tableOutput("polyOutputTable"),
+                 verbatimTextOutput("polyVariableDescription"),
+                 tableOutput("polyExcelFormat")
+               )
+             )
     )
   )
 )
 
 server <- function(input, output, session) {
   
+  # Tab 1: Single Input Calculator
   reactiveData <- reactive({
     req(input$inputName, input$inputAffiliation, input$inputEmail)
     
-    
     if (!is.null(input$inputFile)) {
-      
       data <- read.xlsx(input$inputFile$datapath)
-      data$CIR <- data$upper/data$lower
-      
+      data$CIR <- data$upper / data$lower
     } else {
       Tp <- input$inputTp
       RR <- input$inputRR
       CIR <- input$inputCIR
       Pe <- input$inputPe
-      
       data <- expand.grid(Tp, Pe, RR, CIR)
       colnames(data) <- c("Tp", "Pe", "RR", "CIR")
     }
-    
     
     data1 <- dplyr::rename(data, Tp =Tp, Pe = Pe, RR = RR, CIR = CIR )%>%
       dplyr::mutate(beta = log(RR) , 
@@ -143,7 +159,7 @@ server <- function(input, output, session) {
       O = Pe/(1-Pe)
       ((O/Tp)*((RR-1)^2 + Var_beta*RR^2) + Var_beta*O^2*RR^2 )*(1-AF)^2/(1+O)^2
     }
-
+    
     
     data3 <- data2 %>%
       mutate(
@@ -171,7 +187,6 @@ server <- function(input, output, session) {
         ,Green.Sen.Var.beta = (Green.Var.AF.Var.beta - Green.Var.AF) / (Var.beta * delta)
       ) %>% data.frame
     
-    
   })
   
   output$outputTable <- renderTable({
@@ -190,7 +205,7 @@ server <- function(input, output, session) {
   
   output$downloadData <- downloadHandler(
     filename = function() {
-      paste("data-", Sys.Date(), ".xlsx", sep="")
+      paste("results-", Sys.Date(), ".xlsx", sep="")
     },
     content = function(file) {
       write.xlsx(reactiveData(), file)
@@ -220,6 +235,87 @@ server <- function(input, output, session) {
   
   observeEvent(input$confirmInfo, {
     shinyjs::hide("infoInputs")
+  })
+  
+  # Tab 2: Polytomous Exposure Calculator
+  reactivePolyData <- reactive({
+    req(input$polyFile)
+    data <- read.xlsx(input$polyFile$datapath)
+    
+    validate(
+      need(all(c("Category", "Tp", "Pe", "RR", "Lower", "Upper") %in% colnames(data)), 
+           "The uploaded file must contain the columns: Category, Tp, Pe, RR, Lower, Upper.")
+    )
+    
+    
+    # Polytomous Exposure Equation
+    data <- data %>%
+      mutate(
+        Pi_RR_minus1 = Pe * (RR - 1)  # p_i * (RR_i - 1)
+      ) 
+    
+    # Summation of Pi_RR_minus1 across all categories
+    sum_Pi_RR_minus1 <- sum(data$Pi_RR_minus1)
+    PAF <- sum_Pi_RR_minus1 / (sum_Pi_RR_minus1 + 1)
+    
+    # Monte Carlo simulation
+    set.seed(1234)
+    Monte.PAF <- replicate(10000, {
+      MonteRR <- rlnorm(nrow(data), log(data$RR), log(data$Upper / data$Lower) / (2 * qnorm(0.975)))
+      MontePe <- rbinom(nrow(data), data$Tp, data$Pe) / data$Tp
+      MontePi_RR_minus1 <- MontePe * (MonteRR - 1)
+      MonteSum_Pi_RR_minus1 <- sum(MontePi_RR_minus1)
+      MonteSum_Pi_RR_minus1 / (MonteSum_Pi_RR_minus1 + 1)
+    })
+    
+    # Monte Carlo CI
+    Monte.PAF.low <- quantile(Monte.PAF, 0.025)
+    Monte.PAF.up <- quantile(Monte.PAF, 0.975)
+    Monte.PAF.median <- median(Monte.PAF)
+    
+    # Add results to the dataframe
+    data <- data %>%
+      mutate(Sum_Pi_RR_minus1 = sum_Pi_RR_minus1,
+             PAF = PAF,
+             Monte.PAF.median = Monte.PAF.median,
+             Monte.PAF.low = Monte.PAF.low,
+             Monte.PAF.up = Monte.PAF.up)
+    
+  })
+  
+  
+  output$polyOutputTable <- renderTable({
+    reactivePolyData()
+  })
+  
+  output$polyExcelFormat <- renderTable({
+    data.frame(
+      Category = c("<18.5", "25.0-26.9", "27.0-29.9", "\u226530"),
+      Tp = c(1000.00, 2000.00, 1500.00, 500.00),
+      Pe = c(0.20, 0.30, 0.25, 0.10),
+      RR = c(1.50, 2.00, 2.50, 3.00),
+      Lower = c(1.20, 1.80, 2.20, 2.70),
+      Upper = c(1.80, 2.20, 2.80, 3.30)
+    )
+  })
+  
+  output$downloadPolyResults <- downloadHandler(
+    filename = function() {
+      paste("polytomous_results-", Sys.Date(), ".xlsx", sep = "")
+    },
+    content = function(file) {
+      write.xlsx(reactivePolyData(), file)
+    }
+  )
+  
+  output$polyVariableDescription <- renderText({
+    paste(
+      "The Polytomous Exposure Equation is used to calculate Population Attributable Fractions (PAF) as follows:",
+      "Sum_Pi_RR_minus1 = Σ (Pe_i * (RR_i - 1))",
+      "PAF = Sum_Pi_RR_minus1 / (Sum_Pi_RR_minus1 + 1)",
+      "Input columns in the Excel file must include: Category, Tp, Pe, RR, Lower, and Upper.",
+      sep = "\n"
+    )
   })
 }
 
