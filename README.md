@@ -35,11 +35,11 @@ This tab allows users to:
 
 **where**:
    
-   ![k](https://latex.codecogs.com/png.latex?\dpi{200}\bg_white%20k%3A%20%5Ctext%7BNumber%20of%20exposure%20categories%7D)
+   ![k](https://latex.codecogs.com/png.latex?\dpi{100}\bg_white%20k%3A%20%5Ctext%7BNumber%20of%20exposure%20categories%7D)
    
-   ![pi](https://latex.codecogs.com/png.latex?\dpi{200}\bg_white%20p_i%3A%20%5Ctext%7BPrevalence%20of%20the%20%7Di%5Ctext%7B-th%20exposure%20category%7D)
+   ![pi](https://latex.codecogs.com/png.latex?\dpi{100}\bg_white%20p_i%3A%20%5Ctext%7BPrevalence%20of%20the%20%7Di%5Ctext%7B-th%20exposure%20category%7D)
    
-   ![RRi](https://latex.codecogs.com/png.latex?\dpi{200}\bg_white%20RR_i%3A%20%5Ctext%7BRelative%20Risk%20of%20the%20%7Di%5Ctext%7B-th%20exposure%20category%7D)
+   ![RRi](https://latex.codecogs.com/png.latex?\dpi{100}\bg_white%20RR_i%3A%20%5Ctext%7BRelative%20Risk%20of%20the%20%7Di%5Ctext%7B-th%20exposure%20category%7D)
 
 3. Perform Monte Carlo simulations to estimate:
    - Median \( PAF \)
