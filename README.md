@@ -31,9 +31,7 @@ This tab allows users to:
 1. Upload an Excel file containing data for multiple exposure categories.
 2. Compute the PAF using the **Polytomous Exposure Equation**:
 
-   \[
-   PAF = \frac{\sum_{i=1}^k p_i (RR_i - 1)}{\sum_{i=1}^k p_i (RR_i - 1) + 1}
-   \]
+![PAF Equation](https://latex.codecogs.com/png.latex?PAF%20%3D%20%5Cfrac%7B%5Csum_%7Bi%3D1%7D%5Ek%20p_i%20%28RR_i%20-%201%29%7D%7B%5Csum_%7Bi%3D1%7D%5Ek%20p_i%20%28RR_i%20-%201%29%20%2B%201%7D)
 
    where:
    - \( k \): Number of exposure categories
