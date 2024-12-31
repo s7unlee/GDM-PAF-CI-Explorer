@@ -30,14 +30,19 @@ This tab allows users to:
 This tab allows users to:
 1. Upload an Excel file containing data for multiple exposure categories.
 2. Compute the PAF using the **Polytomous Exposure Equation**:
+
    \[
    PAF = \frac{\sum_{i=1}^k p_i (RR_i - 1)}{\sum_{i=1}^k p_i (RR_i - 1) + 1}
    \]
+
    where:
    - \( k \): Number of exposure categories
    - \( p_i \): Prevalence of the \( i \)-th exposure category
    - \( RR_i \): Relative Risk of the \( i \)-th exposure category
-3. Perform Monte Carlo simulations to estimate median \( PAF \) and its 95% confidence intervals.
+
+3. Perform Monte Carlo simulations to estimate:
+   - Median \( PAF \)
+   - 95% confidence intervals for \( PAF \)
 4. Download the results in an Excel format.
 
 ---
@@ -107,17 +112,17 @@ The format for the Excel file in the **Polytomous Exposure Calculator** tab shou
 | **Monte.RR**         | Median and 95% CI for the RR from the Monte Carlo method                                      |
 | **Monte.Pe**         | Median and 95% CI for the Pe from the Monte Carlo method                                      |
 | **Monte.AF**         | Median and 95% CI for the AF from the Monte Carlo method                                      |
-| **Monte.low**        | Lower 95% CI from the Monte Carlo method                                                      |
-| **Monte.up**         | Upper 95% CI from the Monte Carlo method                                                      |
+| **Monte.low**        | Lower 95% CI from the Monte Carlo method                                                     |
+| **Monte.up**         | Upper 95% CI from the Monte Carlo method                                                     |
 
 ### Polytomous Exposure Calculator
-| **Term**             | **Description**                                                                                |
+| **Term**             | **Description**                                                                                 |
 |-----------------------|-----------------------------------------------------------------------------------------------|
-| **Sum_Pi_RR_minus1**  | The summation of \( p_i \cdot (RR_i - 1) \) for all categories                                |
+| **Sum_Pi_RR_minus1**  | The summation of \( p_i \cdot (RR_i - 1) \) for all categories                                  |
 | **PAF**               | Population Attributable Fraction using the Polytomous Exposure Equation                       |
-| **Monte.PAF.median**  | Median \( PAF \) value from Monte Carlo simulations                                           |
-| **Monte.PAF.low**     | Lower 95% confidence limit of \( PAF \) from Monte Carlo simulations                          |
-| **Monte.PAF.up**      | Upper 95% confidence limit of \( PAF \) from Monte Carlo simulations                          |
+| **Monte.PAF.median**  | Median \( PAF \) value from Monte Carlo simulations                                            |
+| **Monte.PAF.low**     | Lower 95% confidence limit of \( PAF \) from Monte Carlo simulations                           |
+| **Monte.PAF.up**      | Upper 95% confidence limit of \( PAF \) from Monte Carlo simulations                           |
 
 ---
 
