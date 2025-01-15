@@ -77,7 +77,7 @@ server <- function(input, output, session) {
     
     if (!is.null(input$inputFile)) {
       data <- read.xlsx(input$inputFile$datapath)
-      data$CIR <- data$upper / data$lower
+      data$CIR <- data$Upper / data$Lower
     } else {
       Tp <- input$inputTp
       RR <- input$inputRR
