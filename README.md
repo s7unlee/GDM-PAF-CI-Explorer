@@ -30,9 +30,13 @@ To use the application, visit the Shiny app at the following link:
 ### Polytomous Exposure Calculator
 - Upload an Excel file with data for multiple exposure categories or enter values directly.
 - Compute PAF using the **Polytomous Exposure Equation**:
-  ![Polytomous Equation](https://latex.codecogs.com/png.latex?PAF%20%3D%20%5Cfrac%7B%5Csum_%7Bi%3D1%7D%5Ek%20p_i%20%28RR_i%20-%201%29%7D%7B%5Csum_%7Bi%3D1%7D%5Ek%20p_i%20%28RR_i%20-%201%29%20%2B%201%7D)
+
+  $$PAF = \frac{\sum_{i=1}^{k} p_i (RR_i - 1)}{\sum_{i=1}^{k} p_i (RR_i - 1) + 1}$$
+
+  where:
   - \( p_i \): Prevalence of the \(i\)-th exposure category  
   - \( RR_i \): Relative risk of the \(i\)-th exposure category
+
 - Perform Monte Carlo simulations to estimate:
   - Median \( PAF \)
   - 95% confidence intervals
@@ -41,7 +45,9 @@ To use the application, visit the Shiny app at the following link:
 ### PAF Summation Calculator
 - Input multiple PAF values manually or via Excel file upload.
 - Summarize PAF values using the formula:
-  ![PAF Summation](https://latex.codecogs.com/png.latex?Summed%20PAF%20%3D%201%20-%20%5Cprod_%7Bi%3D1%7D%5E%7Bn%7D%20%281%20-%20PAF_i%29)
+
+  $$Summed \, PAF = 1 - \prod_{i=1}^{n} (1 - PAF_i)$$
+
 - View results and download in Excel format.
 
 ---
