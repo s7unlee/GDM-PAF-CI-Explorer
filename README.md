@@ -48,7 +48,12 @@ To use the application, visit the Shiny app at the following link:
 
   $$Summed \, PAF = 1 - \prod_{i=1}^{n} (1 - PAF_i)$$
 
+  This formula is derived from the study:  
+  **"A Method for Summing Attributable Risks to Estimate the Total Risk Attributable to Multiple Risk Factors"**  
+  [10.1093/oxfordjournals.aje.a121617](https://doi.org/10.1093/oxfordjournals.aje.a121617)
+
 - View results and download in Excel format.
+
 
 ---
 
