@@ -1,131 +1,111 @@
 # GDM-PAF CI Explorer (PAF 95% CI Explorer: Greenland, Delta, Monte Carlo methods)
 
-The **GDM-PAF CI Explorer** is a Shiny web application for exploring the confidence intervals of Population Attributable Fraction (PAF). This app supports two key functionalities:
-1. Calculating PAF and its 95% confidence intervals using Greenland, Delta, and Monte Carlo methods.
-2. Computing PAF for multiple exposure categories using the Polytomous Exposure Equation.
+The **GDM-PAF CI Explorer** is a Shiny web application designed for exploring the confidence intervals of Population Attributable Fraction (PAF). This app supports three key functionalities:
+
+1. **Single Input Calculator**: Calculate PAF and its 95% confidence intervals using Greenland, Delta, and Monte Carlo methods.
+2. **Polytomous Exposure Calculator**: Compute PAF for multiple exposure categories using the Polytomous Exposure Equation.
+3. **PAF Summation Calculator**: Aggregate PAF values across multiple exposures.
 
 ## How to Run
-To run the app, you can visit the Shiny app at the following link:
+To use the application, visit the Shiny app at the following link:  
 [https://sjunlee.shinyapps.io/GDMPAFCIExplorer/](https://sjunlee.shinyapps.io/GDMPAFCIExplorer/)
 
 ---
 
 ## Features
 
-### **Single Input Calculator**
-This tab allows users to:
-1. Enter their **Name**, **Affiliation**, and **Email** in the respective fields.
-2. Provide inputs directly for:
-   - **Tp**: Total population
-   - **RR**: Relative risk
-   - **CIR**: Ratio of upper-to-lower 95% confidence interval of RR
-   - **Pe**: Prevalence of the risk factor in the population
-3. Alternatively, upload an Excel file containing the input data.
-4. Compute the PAF and its confidence intervals using Greenland, Delta, and Monte Carlo methods.
-5. Download the results in an Excel format.
+### Single Input Calculator
+- Enter your **Name**, **Affiliation**, and **Email** (not stored).
+- Input required values:
+  - **Tp**: Total population
+  - **Pe**: Prevalence of the risk factor
+  - **RR**: Relative risk
+  - **Lower** and **Upper** bounds of the 95% confidence interval of RR
+- Alternatively, upload an Excel file with the required data.
+- Outputs include:
+  - PAF and confidence intervals (Greenland, Delta, Monte Carlo methods)
+  - Sensitivity analysis results
+- Download results in Excel format.
 
----
+### Polytomous Exposure Calculator
+- Upload an Excel file with data for multiple exposure categories or enter values directly.
+- Compute PAF using the **Polytomous Exposure Equation**:
+  ![Polytomous Equation](https://latex.codecogs.com/png.latex?PAF%20%3D%20%5Cfrac%7B%5Csum_%7Bi%3D1%7D%5Ek%20p_i%20%28RR_i%20-%201%29%7D%7B%5Csum_%7Bi%3D1%7D%5Ek%20p_i%20%28RR_i%20-%201%29%20%2B%201%7D)
+  - \( p_i \): Prevalence of the \(i\)-th exposure category  
+  - \( RR_i \): Relative risk of the \(i\)-th exposure category
+- Perform Monte Carlo simulations to estimate:
+  - Median \( PAF \)
+  - 95% confidence intervals
+- Download results in Excel format.
 
-### **Polytomous Exposure Calculator**
-This tab allows users to:
-1. Upload an Excel file containing data for multiple exposure categories.
-2. Compute the PAF using the **Polytomous Exposure Equation**:
-
-![PAF Equation](https://latex.codecogs.com/png.latex?\dpi{150}\bg_white%20PAF%20%3D%20%5Cfrac%7B%5Csum_%7Bi%3D1%7D%5Ek%20p_i%20%28RR_i%20-%201%29%7D%7B%5Csum_%7Bi%3D1%7D%5Ek%20p_i%20%28RR_i%20-%201%29%20%2B%201%7D)
-
-**where**:
-   
-   ![k](https://latex.codecogs.com/png.latex?\dpi{100}\bg_white%20k%3A%20%5Ctext%7BNumber%20of%20exposure%20categories%7D)
-   
-   ![pi](https://latex.codecogs.com/png.latex?\dpi{100}\bg_white%20p_i%3A%20%5Ctext%7BPrevalence%20of%20the%20%7Di%5Ctext%7B-th%20exposure%20category%7D)
-   
-   ![RRi](https://latex.codecogs.com/png.latex?\dpi{100}\bg_white%20RR_i%3A%20%5Ctext%7BRelative%20Risk%20of%20the%20%7Di%5Ctext%7B-th%20exposure%20category%7D)
-
-3. Perform Monte Carlo simulations to estimate:
-   - Median \( PAF \)
-   - 95% confidence intervals for \( PAF \)
-4. Download the results in an Excel format.
+### PAF Summation Calculator
+- Input multiple PAF values manually or via Excel file upload.
+- Summarize PAF values using the formula:
+  ![PAF Summation](https://latex.codecogs.com/png.latex?Summed%20PAF%20%3D%201%20-%20%5Cprod_%7Bi%3D1%7D%5E%7Bn%7D%20%281%20-%20PAF_i%29)
+- View results and download in Excel format.
 
 ---
 
 ## How to Use
 
-### **Single Input Calculator**
-1. Go to the "Single Input Calculator" tab.
-2. Fill in your **Name**, **Affiliation**, and **Email**.
-3. Enter the required inputs or upload an Excel file.
-4. View the calculated results on the page.
-5. Download the results using the **Download Results** button.
+1. **Single Input Calculator**:
+   - Fill in your details and input values directly or upload an Excel file.
+   - View the calculated PAF, confidence intervals, and sensitivity analysis results.
+   - Download the results.
 
-### **Polytomous Exposure Calculator**
-1. Go to the "Polytomous Exposure Calculator" tab.
-2. Upload an Excel file with the required format (see below).
-3. The app will automatically compute the PAF using the Polytomous Exposure Equation and display the results, including Monte Carlo confidence intervals.
-4. Download the results using the **Download Results** button.
+2. **Polytomous Exposure Calculator**:
+   - Upload an Excel file with the required format or enter data manually.
+   - Compute PAF and Monte Carlo confidence intervals.
+   - Download the results.
+
+3. **PAF Summation Calculator**:
+   - Provide PAF values manually or via Excel file upload.
+   - Compute the summarized PAF value.
+   - Download the results.
 
 ---
 
 ## Input File Format
 
 ### Single Input Calculator
-The format for the Excel file in the **Single Input Calculator** tab should match the following structure:
-
-| Tp        | Pe  | RR  | Lower | Upper |
-| --------- | --- | --- | ----- | ----- |
-| 1000.00   | 0.01| 1.20| 1.05  | 1.37  |
-| 1000.00   | 0.90| 1.20| 1.05  | 1.37  |
-| 10000.00  | 0.50| 2.00| 1.75  | 2.28  |
+| **Tp**  | **Pe** | **RR** | **Lower** | **Upper** |
+|---------|--------|--------|-----------|-----------|
+| 1000.00 | 0.01   | 1.20   | 1.05      | 1.37      |
+| 1000.00 | 0.90   | 1.20   | 1.05      | 1.37      |
 
 ### Polytomous Exposure Calculator
-The format for the Excel file in the **Polytomous Exposure Calculator** tab should match the following structure:
+| **Category** | **Tp**  | **Pe** | **RR** | **Lower** | **Upper** |
+|--------------|---------|--------|--------|-----------|-----------|
+| <18.5        | 1000.00 | 0.20   | 1.50   | 1.20      | 1.80      |
 
-| Category     | Tp        | Pe  | RR  | Lower | Upper |
-| ------------ | --------- | --- | --- | ----- | ----- |
-| <18.5        | 1000.00   | 0.20| 1.50| 1.20  | 1.80  |
-| 25.0-26.9    | 2000.00   | 0.30| 2.00| 1.80  | 2.20  |
-| 27.0-29.9    | 1500.00   | 0.25| 2.50| 2.20  | 2.80  |
-| ≥30          | 500.00    | 0.10| 3.00| 2.70  | 3.30  |
+### PAF Summation Calculator
+| **PAF** |
+|---------|
+| 0.10    |
+| 0.20    |
 
 ---
 
 ## Output Format
 
 ### Single Input Calculator
-| **Term**             | **Description**                                                                                 |
-|-----------------------|-----------------------------------------------------------------------------------------------|
-| **TP**               | Total population                                                                              |
-| **Pe**               | Prevalence of the risk factor in the population                                                |
-| **RR**               | Relative risk                                                                                 |
-| **CIR**              | Ratio of upper-to-lower 95% confidence interval of relative risk                               |
-| **Var.Pe**           | Variance of Pe                                                                                |
-| **O**                | Odds of Pe                                                                                    |
-| **logse**            | The standard error of log(RR)                                                                 |
-| **Z**                | Absolute value of beta divided by logse                                                       |
-| **Pval**             | P-value                                                                                       |
-| **Var.beta**         | Square of logse                                                                               |
-| **AF**               | Attributable fraction                                                                         |
-| **Delta.Var.AF**     | Variance of AF using Delta method                                                             |
-| **Delta.low**        | Lower 95% CI of AF using Delta method                                                         |
-| **Delta.up**         | Upper 95% CI of AF using Delta method                                                         |
-| **Green.Var.AF**     | Variance of AF using Greenland method                                                         |
-| **Green.low**        | Lower 95% CI of AF using Greenland method                                                     |
-| **Green.up**         | Upper 95% CI of AF using Greenland method                                                     |
-| **Monte.RR**         | Median and 95% CI for the RR from the Monte Carlo method                                      |
-| **Monte.Pe**         | Median and 95% CI for the Pe from the Monte Carlo method                                      |
-| **Monte.AF**         | Median and 95% CI for the AF from the Monte Carlo method                                      |
-| **Monte.low**        | Lower 95% CI from the Monte Carlo method                                                     |
-| **Monte.up**         | Upper 95% CI from the Monte Carlo method                                                     |
+Outputs include:
+- PAF values and 95% confidence intervals (Delta, Greenland, Monte Carlo methods)
+- Sensitivity analysis results for inputs \( Tp \), \( Pe \), \( RR \), and variance of \( RR \).
 
 ### Polytomous Exposure Calculator
-| **Term**             | **Description**                                                                                 |
-|-----------------------|-----------------------------------------------------------------------------------------------|
-| **Sum_Pi_RR_minus1**  | The summation of \( p_i \cdot (RR_i - 1) \) for all categories                                  |
-| **PAF**               | Population Attributable Fraction using the Polytomous Exposure Equation                       |
-| **Monte.PAF.median**  | Median \( PAF \) value from Monte Carlo simulations                                            |
-| **Monte.PAF.low**     | Lower 95% confidence limit of \( PAF \) from Monte Carlo simulations                           |
-| **Monte.PAF.up**      | Upper 95% confidence limit of \( PAF \) from Monte Carlo simulations                           |
+Outputs include:
+- Summed \( p_i (RR_i - 1) \)
+- PAF value
+- Monte Carlo median and 95% confidence intervals.
+
+### PAF Summation Calculator
+Outputs include:
+- Individual PAF values
+- Summed \( PAF \).
 
 ---
 
 ## Citation
-Please cite this application and method as follows: https://doi.org/10.3961/jpmph.24.272
+Please cite this application as:  
+[https://doi.org/10.3961/jpmph.24.272](https://doi.org/10.3961/jpmph.24.272)
