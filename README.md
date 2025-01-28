@@ -118,5 +118,4 @@ Outputs include:
 ---
 
 ## Citation
-Please cite this application as:  
-[https://doi.org/10.3961/jpmph.24.272](https://doi.org/10.3961/jpmph.24.272)
+Please cite this application as: [https://doi.org/10.3961/jpmph.24.272](https://doi.org/10.3961/jpmph.24.272)
