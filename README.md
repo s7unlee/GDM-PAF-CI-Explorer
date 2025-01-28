@@ -34,8 +34,8 @@ To use the application, visit the Shiny app at the following link:
   $$PAF = \frac{\sum_{i=1}^{k} p_i (RR_i - 1)}{\sum_{i=1}^{k} p_i (RR_i - 1) + 1}$$
 
   where:
-  - \( p_i \): Prevalence of the \(i\)-th exposure category  
-  - \( RR_i \): Relative risk of the \(i\)-th exposure category
+  - $p_i$: Prevalence of the $i$-th exposure category  
+  - $RR_i$: Relative risk of the $i$-th exposure category
 
 - Perform Monte Carlo simulations to estimate:
   - Median \( PAF \)
